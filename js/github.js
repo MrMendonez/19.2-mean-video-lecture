@@ -6,4 +6,11 @@ angular.module('todoApp')
         $scope.repos = response.data
       });
     });
+
+    $scope.$watch('selectedRepo', function() {
+      $http.get('http://api.github.com/repos/' + $scope.selectedRepo + '/commits')
+      .then(function(response) {
+        $scope.commits = response.data;
+      });
+    });
   });
